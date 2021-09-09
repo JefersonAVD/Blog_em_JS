@@ -1,0 +1,17 @@
+.hidden{
+    display: none;
+}
+li .text-title{
+    font-size: 120%;
+}
+
+textarea.form-control{
+    resize:none;
+    margin-bottom: 3vw;
+}
+
+a{
+    text-decoration: underline;
+    cursor:pointer
+
+}
