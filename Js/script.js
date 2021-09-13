@@ -10,8 +10,6 @@ const requisitar = (type,url) =>{
 
 }
 const post = requisitar("get",posts)
-
-
 const conteudo = document.querySelector('#conteudo')
 Header(conteudo);
 post.onload = () =>{

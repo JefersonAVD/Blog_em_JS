@@ -25,7 +25,7 @@ function Header(){
     const a = document.createElement('a')
     a.setAttribute('class','nav-link')
     a.innerText = "Voltar para a página inicial"
-    a.href = "http://127.0.0.1:5500/Blog_em_JS/blog.html"
+    a.href = "blog.html"
     a.style.color = "white"
 
     const a2 = document.createElement('a')

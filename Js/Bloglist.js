@@ -31,16 +31,14 @@ const blogList = (data, conteudo)=>{
         
         return card
         
-    })
-    
-    
+    }) 
     pagination(array,conteudo)
 
 }
 
 
 function pagination(array,conteudo){
-    let numPosts = 10;
+    let numPosts = 5;
     let paginasTotal = Math.ceil(array.length/numPosts)
     let paginaAtual = 1;
 
@@ -53,12 +51,13 @@ function pagination(array,conteudo){
         if(array[i]== null)continue;
         conteudo.appendChild(array[i])
     }
-    let paginas = paginasTotal >4?3:paginasTotal;
 
-    const [firstPG,lastPG]= NewPages(paginas,paginaAtual,paginasTotal)
+    let paginas = paginasTotal > 4 ? 3 : paginasTotal;
 
-    createBtn(firstPG,lastPG,paginas,paginasTotal,ul,numPosts,array,paginaAtual)
+    const [firstPG , lastPG]= NewPages(paginas,paginaAtual,paginasTotal)
     
+    createBtn(firstPG,lastPG,paginas,paginasTotal,ul,numPosts,array,paginaAtual)
+
     conteudo.parentElement.appendChild(nav).appendChild(ul) 
 }
 
@@ -77,6 +76,7 @@ const NewPages = (paginas,paginaAtual,paginasTotal) => {
         maxPages = parseInt(paginasTotal);
         minPages = paginasTotal - (paginas-1);
     }  
+    
     return [minPages,maxPages] 
 }
 
@@ -114,12 +114,12 @@ function createBtn(minPages,maxPages,paginas,paginasTotal,ul,numPosts,array,pagi
     nextlink.innerText = "Ultima página";
     nextlink.href = '#'
 
+
     ul.appendChild(next).appendChild(nextlink);
     const navBtn = ul.childNodes
 
     navBtn.forEach(x => {
         x.addEventListener('click',()=>{
-
             x.parentElement.innerHTML=''
             paginaAtual = parseInt(x.firstChild.rel)
     
@@ -127,16 +127,14 @@ function createBtn(minPages,maxPages,paginas,paginasTotal,ul,numPosts,array,pagi
             
             createBtn(firstPG,lastPG,paginas,paginasTotal,ul,numPosts,array,paginaAtual);
             
-            ul.parentElement.parentElement.childNodes[1].innerHTML='';
+            conteudo.innerHTML='';
         
             for(let i = 0; i < numPosts ;i++){
                 if((i+(numPosts*(paginaAtual-1)))>=array.length) return;
 
-                ul.parentElement.parentElement.childNodes[1].appendChild(array[i+(numPosts*(paginaAtual-1))])
+                conteudo.appendChild(array[i+(numPosts*(paginaAtual-1))])
 
             }
         })  
     }); 
-
-    
 }
