@@ -15,3 +15,12 @@ a{
     cursor:pointer
 
 }
+.page-link:focus{
+    z-index: 3; 
+     color: none;
+    background: none;
+    outline: none; 
+    box-shadow:none
+
+}
+

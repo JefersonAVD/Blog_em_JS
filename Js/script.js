@@ -16,11 +16,12 @@ const conteudo = document.querySelector('#conteudo')
 Header(conteudo);
 post.onload = () =>{
     const data = JSON.parse(post.responseText);
-    console.log(data)
     if(!Array.isArray(data)){
         blogBody(data,conteudo);
     }else if(Array.isArray(data)){
         blogList(data,conteudo);
+        
     }
+    
 };
 
