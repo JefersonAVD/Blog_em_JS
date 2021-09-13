@@ -10,7 +10,6 @@ const blogBody = (data, conteudo)=>{
         let Comentario;
         let reply;
         const comments =  JSON.parse(comit.response);
-        console.log(comments)
         conteudo.appendChild(postlist)
         const lista = comments.map(x=>{
             Comentario = CriarComentarios(x);
@@ -126,7 +125,6 @@ function FormFunction (){
         parent:parent.value,
 
         });
-        console.log(data);
         send.send(data);
         document.location.reload(true)
         
@@ -147,7 +145,7 @@ function btnCancel(params,x){
         }
         x.parentElement.lastChild.classList.remove('hidden')
         params.firstElementChild.innerText = "Responda à postagem"
-        FormFunction ()
+        FormFunction()
     })
     
 }
@@ -175,8 +173,6 @@ function Form (value = 0){
                             
         const form = document.createRange().createContextualFragment(formReply).firstChild
         form.childNodes[1].innerHTML += "Responda à postagem"
-        
-
     return form
 
 }
