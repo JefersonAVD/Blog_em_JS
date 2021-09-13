@@ -11,10 +11,12 @@ const requisitar = (type,url) =>{
 }
 const post = requisitar("get",posts)
 
+
+const conteudo = document.querySelector('#conteudo')
+Header(conteudo);
 post.onload = () =>{
     const data = JSON.parse(post.responseText);
     console.log(data)
-    const conteudo = document.querySelector('#conteudo')
     if(!Array.isArray(data)){
         blogBody(data,conteudo);
     }else if(Array.isArray(data)){
