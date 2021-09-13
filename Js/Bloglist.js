@@ -38,7 +38,7 @@ const blogList = (data, conteudo)=>{
 
 
 function pagination(array,conteudo){
-    let numPosts = 5;
+    let numPosts = 2;
     let paginasTotal = Math.ceil(array.length/numPosts)
     let paginaAtual = 1;
 

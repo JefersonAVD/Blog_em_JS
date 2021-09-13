@@ -1,7 +1,6 @@
 function Header(){
     const corpo = document.querySelector("body")
-    console.log(corpo)
-
+    
     const header = document.createElement('header')
     header.className = 'navbar navbar-dark navbar-expand bg-primary'
     corpo.insertAdjacentElement('afterbegin',header);

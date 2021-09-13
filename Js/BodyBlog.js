@@ -47,8 +47,8 @@ const blogBody = (data, conteudo)=>{
                 }
                 x.classList.add('hidden')
                 document.querySelector(".response").parentElement.removeChild(document.querySelector(".response"));
-                value = x.value;
-                x.parentElement.appendChild(Form(x.value));
+                value = x.rel;
+                x.parentElement.appendChild(Form(value));
                 x.parentElement.lastChild.childNodes[1].innerHTML = "Responda o comentário de "+ x.parentElement.firstElementChild.innerText
                 btnCancel(Form(),x)
                 FormFunction()
@@ -102,15 +102,18 @@ const btnReply = (params)=>{
     const btn = document.createElement('a');
     btn.setAttribute('Class','reply');
     btn.innerHTML = "Responder comentário"
-    btn.setAttribute("value",params.id);
+    btn.setAttribute("rel",params.id);
     return btn
 }
 
 function FormFunction (){
     
-    document.querySelector('.response').querySelector('form').addEventListener('submit',x=>{
+    document.querySelector('.response').querySelector('form').addEventListener('submit',evt=>{
+        const statusMsg = document.querySelector('#statusMsg')
+        statusMsg.parentElement.classList.remove('hidden') 
+
         
-        x.preventDefault();
+        evt.preventDefault();
         const send = new XMLHttpRequest();
         send.open('POST',"../wordpress/wp-json/wp/v2/comments")
         send.setRequestHeader('content-type','application/json;charset=UTF-8')
@@ -125,8 +128,31 @@ function FormFunction (){
         parent:parent.value,
 
         });
+        
+        send.onload = ()=>{
+            
+            if(send.status == 201){
+                document.querySelectorAll('.form-control').forEach(x=>x.value="")
+                statusMsg.parentElement.classList.toggle('spinner-border')
+                statusMsg.innerHTML = "Seu comentário foi enviado. Aguarde a aprovação"
+                setTimeout(()=>{statusMsg.innerHTML="";
+                statusMsg.parentElement.classList.add("hidden")
+                statusMsg.parentElement.classList.toggle("spinner-border")
+            },5000)
+            }else if(send.status == 400){
+                statusMsg.parentElement.classList.toggle('spinner-border')
+                statusMsg.innerHTML = "Houve um erro no email informado."
+                setTimeout(()=>{
+                    statusMsg.innerHTML="";
+                    statusMsg.parentElement.classList.add("hidden")
+                    statusMsg.parentElement.classList.toggle("spinner-border")
+                },5000)
+            }
+            
+        }
         send.send(data);
-        document.location.reload(true)
+        
+        
         
     })
 }
@@ -167,7 +193,12 @@ function Form (value = 0){
                                         <textarea name="content" id="content" cols="30" rows="10" class="form-control" required></textarea>
                                     </div>
                                     <input type="hidden" value="${value}" id="parent">
-                                    <input type="submit" value="Enviar" class="btn btn-primary">
+                                    <div class="row justify-content-start px-3">
+                                        <input type="submit" value="Enviar" class="btn btn-primary col-4 col-md-2">
+                                        <div class="spinner-border hidden col-8 col-md-10" role="status">
+                                            <span id="statusMsg"></span>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>`
                             
