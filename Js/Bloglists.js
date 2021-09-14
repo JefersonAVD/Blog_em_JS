@@ -1,4 +1,4 @@
-const blogList = (data, conteudo)=>{
+export const blogList = (data, conteudo)=>{
     let i = 0
     const array = data.map(x=>{
         
@@ -47,7 +47,7 @@ function pagination(array,conteudo){
     const ul = document.createElement('ul');
     ul.setAttribute('class','pagination justify-content-center');
 
-    for(i = 0; i < numPosts;i++){
+    for(let i = 0; i < numPosts;i++){
         if(array[i]== null)continue;
         conteudo.appendChild(array[i])
     }

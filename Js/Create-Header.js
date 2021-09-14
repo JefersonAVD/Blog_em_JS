@@ -1,4 +1,4 @@
-function Header(){
+export function Header(){
     const corpo = document.querySelector("body")
     
     const header = document.createElement('header')

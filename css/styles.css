@@ -21,6 +21,9 @@ a{
     background: none;
     outline: none; 
     box-shadow:none
+}
 
+.spinner-border{
+    vertical-align: -.5em
 }
 
